@@ -28,12 +28,13 @@ class App extends Component {
         shoppingList: [...shoppingList, shoppingItem]
       });
     }
+    this.setState({ shoppingItem: '' });
   }
 
   //  https://flaviocopes.com/how-to-remove-item-from-array/
-  handleDelete(Item) {
+  handleDelete(deleteItem) {
     this.setState({
-      shoppingList: this.state.shoppingList.filter(shoppingItem => shoppingItem !== Item)
+      shoppingList: this.state.shoppingList.filter(shoppingItem => shoppingItem !== deleteItem)
     });
   }
 
@@ -42,17 +43,18 @@ class App extends Component {
       <div className="InputForm">
         <form onSubmit={this.handleSubmit}>
           <input
+            type="text"
             name="shoppingItem"
             value={this.state.shoppingItem}
             placeholder="Shopping Item"
             onChange={this.handleChange}
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Add to Shopping list</button>
         </form>
         <ol className="List">
-        {this.state.shoppingList.map((Item) => {
+        {this.state.shoppingList.map((shoppingItem) => {
           return(
-            <ListItem key={Item} value={Item} onClick={this.handleDelete}/>
+            <ListItem key={shoppingItem} value={shoppingItem} onClick={this.handleDelete}/>
           );
         })}
         </ol>
